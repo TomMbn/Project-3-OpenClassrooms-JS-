@@ -5,6 +5,8 @@ let gallery = document.querySelector(".gallery");
 let filter = document.querySelector("#filterList")
 const categorySet = new Set();
 
+/*Récupération des catégories via l'API*/
+
 async function getCategory(){
     const request = await fetch(urlCategory, {
         method : "GET"
@@ -24,6 +26,8 @@ async function getCategory(){
     }
 }
 
+/*Création des filtres et ajout au HTML*/
+
 function addFilter(category){
     let newDiv = document.createElement("div");
     newDiv.setAttribute("class", "filter");
@@ -32,6 +36,8 @@ function addFilter(category){
     document.querySelector("#filterList").appendChild(newDiv);
 }
 
+/*Fonction pour rendre les filtres fonctionnels*/
+
 function eventFilter(){
     let galleryFigures = gallery.querySelectorAll("figure");
     let filterDiv = document.getElementsByClassName("filter");
@@ -39,30 +45,26 @@ function eventFilter(){
     this.style.color = "white";
     this.style.backgroundColor = "#1D6154";
 
-    for (let i = 0; i < filterDiv.length; i++) {
-        if(!(filterDiv[i].textContent === this.textContent)){
-            filterDiv[i].style.color = "#1D6154";
-            filterDiv[i].style.backgroundColor = "white";
+    for(filter of filterDiv){
+        if(!(filter.textContent === this.textContent)){
+            filter.style.color = "#1D6154";
+            filter.style.backgroundColor = "white";
         }
-    }
+    } 
     
     if (this.textContent === "Tous"){
-        for (let i = 0; i < galleryFigures.length; i++) {
-                galleryFigures[i].style.display = "block";
+        for(element of galleryFigures) {
+                element.style.display = "block";
         }
     }
     else{ 
-        for (let i = 0; i < galleryFigures.length; i++) {
-            if(galleryFigures[i].className === this.textContent){
-                galleryFigures[i].style.display = "block";
-            }
-            else{
-                galleryFigures[i].style.display = "none";
-            }
-            
+        for(element of galleryFigures) {
+            element.className === this.textContent ? element.style.display = "block" : element.style.display = "none";
         }
     }
 }
+
+/*Récupération des travaux via l'API*/
 
 async function getWorks(){
     const request = await fetch(urlWorks, {
@@ -81,11 +83,13 @@ async function getWorks(){
     }
 }
 
+/*Ajout des travaux au HTML*/
+
 function addWorks(work){
+
     let image = work.imageUrl; 
     let nom = work.title;
     let category = work.category.name;
-    console.log(category);
 
     let newFigure = document.createElement("figure");
     newFigure.className = category;
@@ -103,6 +107,7 @@ function addWorks(work){
     gallery.appendChild(newFigure);
 }
 
+/*Appel des fonctions*/
 
 getWorks();
 addFilter("Tous");
