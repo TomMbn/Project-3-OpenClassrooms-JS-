@@ -16,13 +16,15 @@
 		<p>Mode édition</p>
 		<button>publier les changements</button>
 	</div>
-	<div class="modal">
+	<div id="modal">
 		<div class="modalContainer active" id="mainModal">
 			<div id="mainActionModal">
 			<button class="closeModal"><i class="fa-solid fa-xmark"></i></button>
 			</div>
 			<h3 class="modalTitle">Galerie photo</h3>
-			<div id="galleryModal"></div>
+			<div id="galleryModal">
+				
+			</div>
 			<div id="addDeleteModal">
 				<button id="buttonAddImage">Ajouter une photo</button>
 				<button id="deleteGallery">Supprimer la gallerie</button>
@@ -34,13 +36,16 @@
 				<i class="fa-solid fa-xmark closeModal"></i>
 			</div>
 			<h3 class="modalTitle">Ajout Photo</h3>
-			<form id="add">
+			<form action="#" method="post" id="add">
 				<div id="formInputs">
 					<div id="addImage">
-						<i class="fa-regular fa-image"></i>
-						<label for="image">+ Ajouter Photo</label>
-						<input type="file" name="image" id="image" accept=".jpg,.png">
-						<p>jpg,.png : 4mo max</p>
+						<div id="addImageNoFile">
+							<i class="fa-regular fa-image"></i>
+							<label for="image">+ Ajouter Photo</label>
+							<input type="file" name="image" id="image" accept=".jpg,.png">
+							<p>jpg,.png : 4mo max</p>
+						</div>
+						<img id="imageNewProject" src="#" alt="New Project">
 					</div>
 					<label for="title">Titre</label>
 					<input type="text" name="title" id="title">
@@ -49,7 +54,9 @@
 						<option value="" disabled selected></option>
 					</select>
 				</div>
-				<input type="submit" value="Valider">
+				<input type="submit" value="Valider" id="submitProject">
+				<p id="errorMessageAdd">Veuillez remplir tous les champs</p>
+				
 			</form>
 		</div>
 	</div>

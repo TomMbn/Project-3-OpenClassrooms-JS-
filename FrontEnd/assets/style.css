@@ -329,7 +329,7 @@ footer nav ul {
 
 /*Style fenêtre Modale*/
 
-.modal{
+#modal{
 	position: fixed;
 	display: none;
 	justify-content: center;
@@ -341,14 +341,13 @@ footer nav ul {
 	background-color: rgba(0, 0, 0, 0.3);
 }
 
-.modal.active{
+#modal.active{
 	display: flex;
 }
 
 .modalContainer,#modalAddContainer{
 	width: 630px;
 	max-width: calc(100vw - 20px);
-	max-height: calc(100vw - 20px);
 	padding: 32px 36px 0px;
 	background-color: #FFFFFF;
 	border-radius: 10px;
@@ -479,7 +478,7 @@ footer nav ul {
 	font-size: 14px;
 	font-weight: 700;
 	margin-top: 32px;
-	margin-bottom: 55px;
+	margin-bottom: 0;
 }
 
 #formInputs{
@@ -499,6 +498,7 @@ footer nav ul {
 
 #addImageModal{
 	display: none;
+	padding-bottom: 55px;
 }
 
 #addImageModal.active{
@@ -513,4 +513,48 @@ footer nav ul {
 #mainModal.active{
 	display: flex;
 	flex-direction: column;
+}
+
+#errorMessageAdd{
+	display: none;
+	color:#D65353;
+	font-size: 14px;
+	font-weight: 400;
+	margin: 20px auto 0;
+}
+
+.editImage{
+	position: relative;
+}
+
+.fa-trash{
+	position:absolute;
+	top: 5px;
+	left: 60px;
+	color:white;
+	background-color: #000000;
+	padding: 4px;
+	border-radius: 2px;
+	font-size: 9px;
+}
+
+.fa-trash:hover{
+	cursor: pointer;
+}
+
+#galleryModal figcaption:hover{
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+#imageNewProject{
+	display: none;
+	height: 193px;
+	max-width: 200px;
+}
+
+#addImageNoFile{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
