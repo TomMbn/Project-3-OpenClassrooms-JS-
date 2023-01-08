@@ -1,3 +1,5 @@
+/*Initialisation des variables*/
+
 let api = "http://localhost:5678/api/";
 let urlWorks = api+"works";
 let urlCategory = api+"categories";
@@ -12,6 +14,7 @@ let addForm = document.querySelector("#add");
 let addImage = addForm.querySelector("input[type=\"file\"]");
 let addTitle = addForm.querySelector("input[type=\"text\"]");
 let addCategory = addForm.querySelector("select");
+let index = 0;
 const categorySet = new Set();
 
 /*Récupération des catégories via l'API*/
@@ -104,6 +107,7 @@ async function getWorks(){
         donnees.forEach(element => {
             addWorks(element);
             addWorksModal(element);
+            index++;
         });
     }
 }
@@ -142,6 +146,12 @@ function addWorksModal(work){
     
     let newDiv = document.createElement("div");
     newDiv.className = "editImage";
+
+    if (index == 0){
+        let moveIcon = document.createElement("i");
+        moveIcon.className = "fa-solid fa-arrows-up-down-left-right";
+        newDiv.appendChild(moveIcon);
+    }
 
     let newIcon = document.createElement("i");
     newIcon.className = "fa-solid fa-trash";
@@ -336,9 +346,9 @@ async function deleteProject(){
 document.querySelector("input[type=\"file\"]").addEventListener("change", function(){
     const file = document.querySelector("input[type=\"file\"]").files[0];
     if (file){
-        document.querySelector("#imageNewProject").setAttribute("src", URL.createObjectURL(file));
-        document.querySelector("#addImageNoFile").style.display = "none";
-        document.querySelector("#imageNewProject").style.display = "flex";
+        imageNewProject.setAttribute("src", URL.createObjectURL(file));
+        addImageNoFile.style.display = "none";
+        imageNewProject.style.display = "flex";
     }
 })
 

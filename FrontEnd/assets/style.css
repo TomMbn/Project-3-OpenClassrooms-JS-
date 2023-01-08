@@ -327,7 +327,7 @@ footer nav ul {
 	margin-left: 57px;
 }
 
-/*Style fenêtre Modale*/
+/*Style fenêtres Modales*/
 
 #modal{
 	position: fixed;
@@ -527,18 +527,26 @@ footer nav ul {
 	position: relative;
 }
 
-.fa-trash{
+.fa-trash, .fa-arrows-up-down-left-right{
 	position:absolute;
-	top: 5px;
-	left: 60px;
 	color:white;
 	background-color: #000000;
 	padding: 4px;
 	border-radius: 2px;
-	font-size: 9px;
+	font-size: 10px;
 }
 
-.fa-trash:hover{
+.fa-trash{
+	top: 5px;
+	left: 58px;
+}
+
+.fa-arrows-up-down-left-right{
+	top: 5px;
+	left: 36px;
+}
+
+.fa-trash, .fa-arrows-up-down-left-right:hover{
 	cursor: pointer;
 }
 
