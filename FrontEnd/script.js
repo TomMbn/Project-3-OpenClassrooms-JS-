@@ -30,9 +30,7 @@ async function getWorks(){
     }
     else{
         let donnees = await request.json();
-        let gallery = document.querySelector("#gallery");
         gallery.replaceChildren();
-        let galleryModal = document.querySelector("#galleryModal");
         galleryModal.replaceChildren();
 
         donnees.forEach(element => {
@@ -223,10 +221,10 @@ let addImageModal = document.querySelector("#addImageModal");
 let mainModal = document.querySelector("#mainModal");
 let errorMessageAdd = document.querySelector("#errorMessageAdd");
 
-edit.forEach(element => element.addEventListener("click", function(){
+document.querySelector("#editGallery").addEventListener("click", function(){
     modal.classList.toggle("active");
 
-}))
+})
 
 
 /*Fermeture modale*/
