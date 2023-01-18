@@ -7,7 +7,7 @@ form.addEventListener("submit", function(e){
     loginFunction();
 });
 
-async function loginFunction(){
+function loginFunction(){
     let email = document.querySelector("#email").value;
     let password = document.querySelector("#password").value;
 

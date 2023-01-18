@@ -17,75 +17,6 @@ let addCategory = addForm.querySelector("select");
 let index = 0;
 const categorySet = new Set();
 
-/*Récupération des catégories via l'API*/
-
-async function getCategory(){
-    const request = await fetch(urlCategory, {
-        method : "GET"
-    });
-
-    if (!request.ok){
-        alert("Une erreur est survenue");
-    }
-    else{
-        let donnees = await request.json();
-        donnees.forEach(element =>{
-            categorySet.add(element.name);
-            addCategoryModal(element);
-        })
-        categorySet.forEach(element => {
-        addFilter(element);
-        });
-    }
-}
-
-/*Création des filtres et ajout au HTML*/
-
-function addFilter(category){
-    let newDiv = document.createElement("div");
-    newDiv.setAttribute("class", "filter");
-    newDiv.textContent = category;
-    newDiv.addEventListener("click", eventFilter);
-    document.querySelector("#filterList").appendChild(newDiv);
-}
-
-/*Fonction pour rendre les filtres fonctionnels*/
-
-function eventFilter(){
-    let galleryFigures = gallery.querySelectorAll("figure");
-    let filterDiv = document.getElementsByClassName("filter");
-
-    this.style.color = "white";
-    this.style.backgroundColor = "#1D6154";
-
-    for(filter of filterDiv){
-        if(!(filter.textContent === this.textContent)){
-            filter.style.color = "#1D6154";
-            filter.style.backgroundColor = "#FEFEF6";
-        }
-    } 
-    
-    if (this.textContent === "Tous"){
-        for(element of galleryFigures) {
-                element.style.display = "block";
-        }
-    }
-    else{ 
-        for(element of galleryFigures) {
-            element.className === this.textContent ? element.style.display = "block" : element.style.display = "none";
-        }
-    }
-}
-
-function addCategoryModal(category){
-    let selectCategory = document.querySelector("#category");
-    let newOption = document.createElement("option");
-
-    newOption.setAttribute("value", category.id);
-    newOption.textContent = category.name;
-
-    selectCategory.appendChild(newOption);
-}
 
 /*Récupération des travaux via l'API*/
 
@@ -174,6 +105,78 @@ function addWorksModal(work){
     galleryModal.appendChild(newFigure);
 }
 
+/*Récupération des catégories via l'API*/
+
+async function getCategory(){
+    const request = await fetch(urlCategory, {
+        method : "GET"
+    });
+
+    if (!request.ok){
+        alert("Une erreur est survenue");
+    }
+    else{
+        let donnees = await request.json();
+        donnees.forEach(element =>{
+            categorySet.add(element.name);
+            addCategoryModal(element);
+        })
+        categorySet.forEach(element => {
+        addFilter(element);
+        });
+    }
+}
+
+/*Création des filtres et ajout au HTML*/
+
+function addFilter(category){
+    let newDiv = document.createElement("div");
+    newDiv.setAttribute("class", "filter");
+    newDiv.textContent = category;
+    newDiv.addEventListener("click", eventFilter);
+    document.querySelector("#filterList").appendChild(newDiv);
+}
+
+/*Fonction pour rendre les filtres fonctionnels*/
+
+function eventFilter(){
+    let galleryFigures = gallery.querySelectorAll("figure");
+    let filterDiv = document.getElementsByClassName("filter");
+
+    this.style.color = "white";
+    this.style.backgroundColor = "#1D6154";
+
+    for(filter of filterDiv){
+        if(!(filter.textContent === this.textContent)){
+            filter.style.color = "#1D6154";
+            filter.style.backgroundColor = "#FEFEF6";
+        }
+    } 
+    
+    if (this.textContent === "Tous"){
+        for(element of galleryFigures) {
+                element.style.display = "block";
+        }
+    }
+    else{ 
+        for(element of galleryFigures) {
+            element.className === this.textContent ? element.style.display = "block" : element.style.display = "none";
+        }
+    }
+}
+
+function addCategoryModal(category){
+    let selectCategory = document.querySelector("#category");
+    let newOption = document.createElement("option");
+
+    newOption.setAttribute("value", category.id);
+    newOption.textContent = category.name;
+
+    selectCategory.appendChild(newOption);
+}
+
+
+
 /*Si connexion page d'accueil en mode édition*/
 
 if (sessionStorage.getItem("token")){
@@ -232,12 +235,7 @@ edit.forEach(element => element.addEventListener("click", function(){
 function closeModal(){
     modal.classList.remove("active");
     if (addImageModal.classList.contains("active")){
-        addImageModal.classList.remove("active");
-        mainModal.classList.toggle("active");
-    }
-    if(errorMessageAdd.style.display == "block"){
-        errorMessageAdd.style.display = "none";
-        addImageModal.style.paddingBottom = "55px"; 
+        backModal(); 
     }
     if(addImageNoFile.style.display == "none"){
         addImageNoFile.style.display = "flex";
